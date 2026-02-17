@@ -4,6 +4,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 require('dns').setServers(['8.8.8.8', '8.8.4.4']);
+const user= require("./model/user");
+const authMiddleware = require("./middleware/authMiddleware.js");
 const app = express();
 app.use(express.json());
 
@@ -140,7 +142,7 @@ app.post("/api/login", async (req, res) => {
     // Generate JWT token
     const token = jwt.sign(
       { id: user._id, email: user.email },
-      process.env.JWT_SECRET || "mysecretkey",
+      process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
 
