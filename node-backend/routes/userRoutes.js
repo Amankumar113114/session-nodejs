@@ -2,7 +2,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const User = require("../model/User");
+const User = require("../model/user");
 const authMiddleware = require("../middleware/authMiddleware");
 
 const router = express.Router();
@@ -29,7 +29,7 @@ router.post("/register", async (req, res) => {
     const user = await User.create({
       name,
       email,
-      password: hashedPassword,
+      password: hashedPassword, 
     });
 
     res.status(201).json({
